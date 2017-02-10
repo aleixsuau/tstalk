@@ -1,9 +1,9 @@
-function clocksService ($filter) {
-    var self = this;
+function clocksService($filter) {
+    var _this = this;
     // User selected zones
-    self.selectedZones = ["Europe/Madrid"];
+    this.selectedZones = ["Europe/Madrid"];
     // Available zones
-    self.timeZones = [
+    this.timeZones = [
         "Pacific/Midway",
         "America/Tijuana",
         "America/Chihuahua",
@@ -107,26 +107,24 @@ function clocksService ($filter) {
         "Pacific/Fiji",
     ];
     // Filter zones
-    self.filterZones = function (query) {
-        return $filter('filter')(self.timeZones, query);
+    this.filterZones = function (query) {
+        return $filter('filter')(_this.timeZones, query);
     };
     // Add a zone to selectedZones
-    self.addZone = function (zone) {
+    this.addZone = function (zone) {
         if (zone) {
-            var itemIndex = self.timeZones.indexOf(zone);
-            self.timeZones.splice(itemIndex, 1);
-            self.selectedZones.push(zone);
+            var itemIndex = _this.timeZones.indexOf(zone);
+            _this.timeZones.splice(itemIndex, 1);
+            _this.selectedZones.push(zone);
         }
     };
     // Remove a zone from selectedZones
-    self.removeZone = function (zone) {
-        var itemIndex = self.selectedZones.indexOf(zone);
-        self.selectedZones.splice(itemIndex, 1);
-        self.timeZones.push(zone);
+    this.removeZone = function (zone) {
+        var itemIndex = _this.selectedZones.indexOf(zone);
+        _this.selectedZones.splice(itemIndex, 1);
+        _this.timeZones.push(zone);
     };
-
 }
-
 angular
     .module("clocks")
     .service("clocksService", clocksService);

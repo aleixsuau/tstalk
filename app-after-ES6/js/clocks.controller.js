@@ -1,18 +1,18 @@
 function ClocksController (clocksService) {
-    var self = this;
-    // self.timeZones = clocksService.timeZones;
-    self.selectedZones = clocksService.selectedZones;
+    this.selectedItem;
+    // this.timeZones = clocksService.timeZones;
+    this.selectedZones = clocksService.selectedZones;
     // Filter zones
-    self.filterZones = function (query) {
+    this.filterZones = (query) => {
        return clocksService.filterZones(query);
     };
     // Add a zone to selectedZones
-    self.addZone = function (zone) {
+    this.addZone = (zone) => {
         clocksService.addZone(zone);
-        self.selectedItem = "";
+        this.selectedItem = "";
     };
     // Remove a zone from selectedZones
-    self.removeZone = function (zone) {
+    this.removeZone = (zone) => {
         clocksService.removeZone(zone);
     };
 }
