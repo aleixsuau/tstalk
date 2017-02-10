@@ -6,20 +6,6 @@ body {
 .md-headline {
     text-align: center;
 }
-/* Custom panel */
-/*.panel {
-    max-width: 315px;
-    float: left;
-    margin: 20px;
-}
-
-.container {
-    width: 1100px;
-}
-
-.panel-heading {
-    text-align: center;
-}*/
 /* https://cssanimation.rocks/clocks/ */
 
 .clock {
