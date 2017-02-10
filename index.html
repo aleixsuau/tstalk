@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ES"
+      ng-app="clocks"
+      ng-cloak>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Time Zones</title>
+
+        <!-- Angular Material CSS -->
+        <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
+        <link href="css/custom.css" rel="stylesheet">
+    </head>
+    <body ng-controller="ClocksController as ctrl">
+        <md-toolbar class="md-menu-toolbar">
+        <div layout="row">
+            <md-toolbar-filler layout layout-align="center center">
+                <md-icon md-svg-icon="call:chat"></md-icon>
+            </md-toolbar-filler>
+            <div>
+            <h2 class="md-toolbar-tools">TimeZones</h2>
+            </div>
+            <md-autocomplete flex
+                 md-input-name="autocompleteField"
+                 md-input-minlength="1"
+                 md-input-maxlength="18"
+                 md-no-cache="ctrl.noCache"
+                 md-selected-item="ctrl.selectedItem"
+                 md-search-text="ctrl.searchText"
+                 md-items="item in ctrl.filterZones(ctrl.searchText)"
+                 md-item-text="item"
+                 md-floating-label="TimeZone to Add"
+                 md-selected-item-change="ctrl.addZone(ctrl.selectedItem)"
+                 md-dropdown-items="10">
+               <md-item-template>
+                 <span md-highlight-text="ctrl.searchText">{{item}}</span>
+               </md-item-template>
+               <div ng-messages="searchForm.autocompleteField.$error" ng-if="searchForm.autocompleteField.$touched">
+                 <div ng-message="required">You <b>must</b> have a favorite state.</div>
+                 <div ng-message="md-require-match">Please select an existing state.</div>
+                 <div ng-message="minlength">Your entry is not long enough.</div>
+                 <div ng-message="maxlength">Your entry is too long.</div>
+               </div>
+             </md-autocomplete>
+        </div>
+        </md-toolbar>
+
+        <md-content class="md-padding" layout-xs="column" layout="row">
+            <div flex-xs flex-gt-xs="33" ng-repeat="timeZone in ctrl.selectedZones">
+              <md-card>
+                <md-card-title>
+                  <md-card-title-text>
+                    <span class="md-headline">{{timeZone}}</span>
+                  </md-card-title-text>
+                </md-card-title>
+                <md-card-title-media>
+                  <clock zone="timeZone"></clock>
+                </md-card-title-media>
+                <md-card-actions layout="row" layout-align="center">
+                  <md-button ng-click="ctrl.removeZone(timeZone)" class="md-accent">Remove</md-button>
+                </md-card-actions>
+              </md-card>
+            </div>
+          </md-content>
+        </div>
+        <!-- Angular Material requires Angular.js Libraries -->
+        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
+        <!-- Angular Material Library -->
+        <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
+        <!-- App files -->
+        <script src="js/app.js"></script>
+        <script src="js/clocks.controller.js"></script>
+        <script src="js/clock.component.js"></script>
+        <script src="js/clocks.service.js"></script>
+    </body>
+</html>
