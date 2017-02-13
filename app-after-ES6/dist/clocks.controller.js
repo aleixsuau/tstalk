@@ -1,22 +1,29 @@
-function ClocksController(clocksService) {
-    var _this = this;
-    this.selectedItem;
-    // this.timeZones = clocksService.timeZones;
-    this.selectedZones = clocksService.selectedZones;
+var ClocksController = (function () {
+    // Injections
+    function ClocksController(clocksService) {
+        this.clocksService = clocksService;
+        this.selectedItem;
+        this.selectedZones = clocksService.selectedZones;
+    }
+    ;
     // Filter zones
-    this.filterZones = function (query) {
-        return clocksService.filterZones(query);
+    ClocksController.prototype.filterZones = function (query) {
+        return this.clocksService.filterZones(query);
     };
+    ;
     // Add a zone to selectedZones
-    this.addZone = function (zone) {
-        clocksService.addZone(zone);
-        _this.selectedItem = "";
+    ClocksController.prototype.addZone = function (zone) {
+        this.clocksService.addZone(zone);
+        this.selectedItem = "";
     };
+    ;
     // Remove a zone from selectedZones
-    this.removeZone = function (zone) {
-        clocksService.removeZone(zone);
+    ClocksController.prototype.removeZone = function (zone) {
+        this.clocksService.removeZone(zone);
     };
-}
+    ;
+    return ClocksController;
+}());
 angular
     .module("clocks")
     .controller("ClocksController", ClocksController);

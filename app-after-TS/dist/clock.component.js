@@ -1,10 +1,14 @@
 // Controller implementation
-function clockController($element) {
-    var _this = this;
+var clockController = (function () {
+    // Injections
+    function clockController($element) {
+        this.$element = $element;
+    }
     // Wait for bindings, linked template, DOM ready
-    this.$postLink = function () {
-        // Get the zone time using JS (from binding) 
-        var date = new Date().toLocaleString("es-ES", { timeZone: _this.zone });
+    clockController.prototype.$postLink = function () {
+        var _this = this;
+        // Get the zone time using JS (from binding) (Fake: won't work in production)
+        var date = new Date().toLocaleString("es-ES", { timeZone: this.zone });
         var dateArray = date.split(" ")[1].split(":");
         var seconds = Number(dateArray[2]);
         var minutes = Number(dateArray[1]);
@@ -17,15 +21,14 @@ function clockController($element) {
         };
         // Position hands when the data is linked and DOM ready
         angular.forEach(hands, function (angle, hand) {
-            var target = $element[0].getElementsByClassName(hand)[0];
+            var target = _this.$element[0].getElementsByClassName(hand)[0];
             target.style.webkitTransform = "rotateZ(" + angle + "deg)";
             target.style.transform = "rotateZ(" + angle + "deg)";
-            if (hand === 'minutes') {
-                target.parentNode.setAttribute('data-second-angle', hands.seconds);
-            }
         });
     };
-}
+    ;
+    return clockController;
+}());
 // Component declaration
 var clockComponent = {
     bindings: {

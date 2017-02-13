@@ -2,10 +2,29 @@ body {
     padding: 20px;
 }
 
+/* Custom */
+.badge {
+    border-radius: 50%;
+    background-color: #ff4081;
+    padding: 3px;
+    margin-left: 5px;
+    margin-top: -20px;
+    min-width: 20px;
+    text-align: center;
+    font-size: small;
+    color: white;
+}
+
 /* Custom material */
 .md-headline {
     text-align: center;
 }
+
+.material-icons.md-18 { font-size: 18px; }
+.material-icons.md-24 { font-size: 24px; }
+.material-icons.md-36 { font-size: 36px; }
+.material-icons.md-48 { font-size: 48px; }
+
 /* https://cssanimation.rocks/clocks/ */
 
 .clock {

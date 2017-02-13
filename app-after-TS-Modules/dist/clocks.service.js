@@ -1,3 +1,4 @@
+"use strict";
 var clocksService = (function () {
     // Injections
     function clocksService($filter) {

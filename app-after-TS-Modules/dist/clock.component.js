@@ -1,3 +1,5 @@
+"use strict";
+// import * as clockTypes from "clock";
 // Controller implementation
 var clockController = (function () {
     // Injections
@@ -7,7 +9,7 @@ var clockController = (function () {
     // Wait for bindings, linked template, DOM ready
     clockController.prototype.$postLink = function () {
         var _this = this;
-        // Get the zone time using JS (from binding) 
+        // Get the zone time using JS (from binding) (Fake: won't work in production)
         var date = new Date().toLocaleString("es-ES", { timeZone: this.zone });
         var dateArray = date.split(" ")[1].split(":");
         var seconds = Number(dateArray[2]);

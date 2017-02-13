@@ -1,27 +1,35 @@
+interface IHands {
+    hours: number,
+    minutes: number,
+    seconds: number
+}
+
 // Controller implementation
-function clockController ($element) {
+class clockController {
+    // TimeZone passed to this compoment as binding
+    private zone: string;
+    // Injections
+    constructor(public $element){
+    }
     // Wait for bindings, linked template, DOM ready
-    this.$postLink = () => {
-        // Get the zone time using JS (from binding) 
-        let date = new Date().toLocaleString("es-ES", {timeZone: this.zone});
-        let dateArray = date.split(" ")[1].split(":");
-        let seconds = Number(dateArray[2]);
-        let minutes = Number(dateArray[1]);
-        let hours = Number(dateArray[0]);
+    $postLink () {
+        // Get the zone time using JS (from binding) (Fake: won't work in production)
+        let date: string = new Date().toLocaleString("es-ES", {timeZone: this.zone});
+        let dateArray: string[] = date.split(" ")[1].split(":");
+        let seconds: number = Number(dateArray[2]);
+        let minutes: number = Number(dateArray[1]);
+        let hours: number = Number(dateArray[0]);
         // Clock's hands position calculations
-        let hands = {
+        let hands: IHands = {
             hours: (hours * 30) + (minutes / 2),
             minutes: (minutes * 6),
             seconds: (seconds * 6)
         };
         // Position hands when the data is linked and DOM ready
-        angular.forEach(hands, function (angle, hand){
-            let target = $element[0].getElementsByClassName(hand)[0];
+        angular.forEach(hands, (angle: number, hand: string): void => {
+            let target: HTMLElement = this.$element[0].getElementsByClassName(hand)[0];
             target.style.webkitTransform = `rotateZ(${angle}deg)`;
             target.style.transform = `rotateZ(${angle}deg)`;
-            if (hand === 'minutes') {
-                target.parentNode.setAttribute('data-second-angle', hands.seconds);
-            }
         });
     };
 }

@@ -10,41 +10,48 @@
 
         <!-- Angular Material CSS -->
         <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link href="css/custom.css" rel="stylesheet">
     </head>
+    <!-- Clock Controller -->
     <body ng-controller="ClocksController as ctrl">
-        <md-toolbar class="md-menu-toolbar">
-        <div layout="row">
-            <md-toolbar-filler layout layout-align="center center">
-                <md-icon md-svg-icon="call:chat"></md-icon>
-            </md-toolbar-filler>
-            <div>
-            <h2 class="md-toolbar-tools">TimeZones</h2>
+        <div layout layout-align="center center">
+            <i class="material-icons md-48">timer</i>           
+            <h1>TimeZones</h1>
+            <div class="badge" ng-if="ctrl.selectedZones.length">
+                {{ ctrl.selectedZones.length }}
             </div>
-            <md-autocomplete flex
-                 md-input-name="autocompleteField"
-                 md-input-minlength="1"
-                 md-input-maxlength="18"
-                 md-no-cache="ctrl.noCache"
-                 md-selected-item="ctrl.selectedItem"
-                 md-search-text="ctrl.searchText"
-                 md-items="item in ctrl.filterZones(ctrl.searchText)"
-                 md-item-text="item"
-                 md-floating-label="TimeZone to Add"
-                 md-selected-item-change="ctrl.addZone(ctrl.selectedItem)"
-                 md-dropdown-items="10">
-               <md-item-template>
-                 <span md-highlight-text="ctrl.searchText">{{item}}</span>
-               </md-item-template>
-               <div ng-messages="searchForm.autocompleteField.$error" ng-if="searchForm.autocompleteField.$touched">
-                 <div ng-message="required">You <b>must</b> have a favorite state.</div>
-                 <div ng-message="md-require-match">Please select an existing state.</div>
-                 <div ng-message="minlength">Your entry is not long enough.</div>
-                 <div ng-message="maxlength">Your entry is too long.</div>
-               </div>
-             </md-autocomplete>
         </div>
-        </md-toolbar>
+        <div layout="row">
+            <div layout="column" flex="33">
+            </div>
+            <div layout="column" flex="33">
+                <md-autocomplete flex
+                    md-input-name="autocompleteField"
+                    md-input-minlength="1"
+                    md-input-maxlength="18"
+                    md-no-cache="ctrl.noCache"
+                    md-selected-item="ctrl.selectedItem"
+                    md-search-text="ctrl.searchText"
+                    md-items="item in ctrl.filterZones(ctrl.searchText)"
+                    md-item-text="item"
+                    md-floating-label="Add a TimeZone"
+                    md-selected-item-change="ctrl.addZone(ctrl.selectedItem)"
+                    md-dropdown-items="10">
+                  <md-item-template>
+                    <span md-highlight-text="ctrl.searchText">{{item}}</span>
+                  </md-item-template>
+                  <div ng-messages="searchForm.autocompleteField.$error" ng-if="searchForm.autocompleteField.$touched">
+                    <div ng-message="required">You <b>must</b> have a favorite state.</div>
+                    <div ng-message="md-require-match">Please select an existing state.</div>
+                    <div ng-message="minlength">Your entry is not long enough.</div>
+                    <div ng-message="maxlength">Your entry is too long.</div>
+                  </div>
+                </md-autocomplete>
+            </div>
+            <div layout="column" flex="33">
+            </div>
+        </div>
 
         <md-content class="md-padding" layout-xs="column" layout="row">
             <div flex-xs flex-gt-xs="33" ng-repeat="timeZone in ctrl.selectedZones">
@@ -55,6 +62,7 @@
                   </md-card-title-text>
                 </md-card-title>
                 <md-card-title-media>
+                  <!-- Clock Component -->
                   <clock zone="timeZone"></clock>
                 </md-card-title-media>
                 <md-card-actions layout="row" layout-align="center">

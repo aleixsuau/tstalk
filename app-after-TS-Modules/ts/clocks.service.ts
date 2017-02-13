@@ -1,7 +1,11 @@
-var clocksService = (function () {
+/// <reference path="../typings/clock.d.ts" />
+import { IClocksService } from "clock";
+
+class clocksService implements IClocksService {
+    public selectedZones: string[];
+    public timeZones: string[];
     // Injections
-    function clocksService($filter) {
-        this.$filter = $filter;
+    constructor (public $filter) {
         // User's selected zones
         this.selectedZones = [];
         // Available zones
@@ -111,28 +115,25 @@ var clocksService = (function () {
         ];
     }
     // Filter zones
-    clocksService.prototype.filterZones = function (query) {
+    filterZones (query) {
         return this.$filter('filter')(this.timeZones, query);
     };
-    ;
     // Add a zone to selectedZones
-    clocksService.prototype.addZone = function (zone) {
+    addZone (zone) {
         if (zone) {
-            var itemIndex = this.timeZones.indexOf(zone);
+            let itemIndex: number = this.timeZones.indexOf(zone);
             this.timeZones.splice(itemIndex, 1);
             this.selectedZones.push(zone);
         }
     };
-    ;
     // Remove a zone from selectedZones
-    clocksService.prototype.removeZone = function (zone) {
-        var itemIndex = this.selectedZones.indexOf(zone);
+    removeZone (zone) {
+        let itemIndex = this.selectedZones.indexOf(zone);
         this.selectedZones.splice(itemIndex, 1);
         this.timeZones.push(zone);
     };
-    ;
-    return clocksService;
-}());
+}
+
 angular
     .module("clocks")
     .service("clocksService", clocksService);

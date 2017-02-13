@@ -1,22 +1,22 @@
 class ClocksController {
+    public selectedItem: string;
+    public selectedZones: string[];
     // Injections
-    constructor(clocksService){
-        this.clocksService = clocksService;
+    constructor(public clocksService: IClocksService){
         this.selectedItem;
         this.selectedZones = clocksService.selectedZones;
-    };
-    
+    }    
     // Filter zones
-    filterZones(query) {
+    filterZones (query: string): string[] {
        return this.clocksService.filterZones(query);
     };
     // Add a zone to selectedZones
-    addZone(zone) {
+    addZone (zone: string): void {
         this.clocksService.addZone(zone);
         this.selectedItem = "";
     };
     // Remove a zone from selectedZones
-    removeZone (zone) {
+    removeZone (zone: string): void {
         this.clocksService.removeZone(zone);
     };
 }

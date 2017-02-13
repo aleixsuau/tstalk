@@ -1,3 +1,4 @@
+"use strict";
 var ClocksController = (function () {
     // Injections
     function ClocksController(clocksService) {

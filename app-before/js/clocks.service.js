@@ -1,9 +1,10 @@
 function clocksService ($filter) {
     var self = this;
     // User selected zones
-    self.selectedZones = ["Europe/Madrid"];
+    self.selectedZones = [];
     // Available zones
     self.timeZones = [
+        "Europe/Madrid",
         "Pacific/Midway",
         "America/Tijuana",
         "America/Chihuahua",
@@ -124,7 +125,6 @@ function clocksService ($filter) {
         self.selectedZones.splice(itemIndex, 1);
         self.timeZones.push(zone);
     };
-
 }
 
 angular
